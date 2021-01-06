@@ -50,15 +50,15 @@ function bindLogOutButton() {
 
 async function deleteBook(bookId) {
   const token = getToken();
-  if(token === null) {
+  if (token === null) {
     location = '/login';
     return;
   }
-  await axios.delete(`https:marktube.tv/v1/book/${bookId}`, {
+  await axios.delete(`https://api.marktube.tv/v1/book/${bookId}`, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 function render(book) {
@@ -72,7 +72,7 @@ function render(book) {
       <p class="card-text">링크 : <a href="${
         book.url
       }" target="_BLANK">바로 가기</a></p>
-      <a href="/edit?id=${book.bookId}" class="btn btn-primary btn-sm">Edit</a>
+      <a href="/edit.html?id=${book.bookId}" class="btn btn-primary btn-sm">Edit</a>
       <button type="button" class="btn btn-danger btn-sm" id="btn-delete">Delete</button>
     </div>
     <div class="card-footer">
@@ -85,9 +85,9 @@ function render(book) {
   document.querySelector('#btn-delete').addEventListener('click', async () => {
     try {
       await deleteBook(book.bookId);
-      location.href = '/';
+      location.assign('/');
     } catch(error) {
-      console(error);
+      console.log(error);
     }
   })
 }
