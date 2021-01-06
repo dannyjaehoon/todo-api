@@ -74,14 +74,14 @@ async function main() {
   // check button
   const token = getToken();
   if(token === null) {
-    location.assign('/');
+    location.assign('/login');
     return;
   }
   // obtain my info with token
   const user = await getUserByToken(token);
   if (user === null) {
     localStorage.clear();
-    location.assign('/');
+    location.assign('/login');
     return;
   }
 }
